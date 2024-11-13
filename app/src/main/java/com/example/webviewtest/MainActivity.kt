@@ -1,84 +1,75 @@
 package com.example.webviewtest
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.provider.OpenableColumns
 import android.widget.Button
 import android.widget.TextView
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import com.itextpdf.text.pdf.PdfReader
 import com.itextpdf.text.pdf.parser.PdfTextExtractor
+import java.io.InputStream
 
 class MainActivity : AppCompatActivity() {
 
-    // on below line we are creating
-    // variable for our button and text view.
     lateinit var extractedTV: TextView
     lateinit var extractBtn: Button
+    private var selectedPdfUri: Uri? = null
+
+    // Register a launcher to handle the PDF file selection
+    private val filePickerLauncher = registerForActivityResult(ActivityResultContracts.OpenDocument()) { uri: Uri? ->
+        uri?.let {
+            selectedPdfUri = it
+            extractData() // Extract data once the user selects a file
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        // on below line we are initializing our
-        // text view and button with its id.
         extractedTV = findViewById(R.id.idTVPDF)
         extractBtn = findViewById(R.id.idBtnExtract)
 
-        // on below line we are adding on
-        // click listener for our button.
         extractBtn.setOnClickListener {
-            // on below line we are calling extract data method
-            // to extract data from our pdf file and
-            // display it in text view.
-            extractData()
+            openFilePicker() // Open file picker when button is clicked
         }
     }
 
-    // on below line we are creating an
-    // extract data method to extract our data.
+    private fun openFilePicker() {
+        // Open the file picker for PDFs
+        filePickerLauncher.launch(arrayOf("application/pdf"))
+    }
+
     private fun extractData() {
-        // on below line we are running a try and catch block
-        // to handle extract data operation.
+        // Ensure a file was selected
+        val pdfUri = selectedPdfUri ?: return
+
         try {
-            // on below line we are creating a
-            // variable for storing our extracted text
             var extractedText = ""
 
-            // on below line we are creating a
-            // variable for our pdf extracter.
-            val pdfReader: PdfReader = PdfReader("res/raw/test.pdf")
+            // Open an InputStream to read the PDF from the selected URI
+            contentResolver.openInputStream(pdfUri)?.use { inputStream ->
+                val pdfReader = PdfReader(inputStream)
 
-            // on below line we are creating
-            // a variable for pages of our pdf.
-            val n = pdfReader.numberOfPages
+                val pageCount = pdfReader.numberOfPages
+                for (i in 0 until pageCount) {
+                    val pageText = PdfTextExtractor.getTextFromPage(pdfReader, i + 1).trim()
 
-            // on below line we are running a for loop.
-            for (i in 0 until n) {
+                    // Filter lines that contain " - " pattern
+                    val filteredLines = pageText.lines().filter { line -> " - " in line }
 
-                // on below line we are appending
-                // our data to extracted
-                // text from our pdf file using pdf reader.
-                extractedText =
-                    """ 
-                 $extractedText${
-                        PdfTextExtractor.getTextFromPage(pdfReader, i + 1).trim { it <= ' ' }
-                    } 
-                  
-                 """.trimIndent()
-                // to extract the PDF content from the different pages
+                    // Append only filtered lines to extractedText
+                    extractedText += filteredLines.joinToString("\n") + "\n"
+                }
+
+                pdfReader.close()
             }
 
-            // on below line we are setting
-            // extracted text to our text view.
-            extractedTV.setText(extractedText)
-
-            // on below line we are
-            // closing our pdf reader.
-            pdfReader.close()
-
-        }
-        // on below line we are handling our
-        // exception using catch block
-        catch (e: Exception) {
+            extractedTV.text = extractedText // Display the filtered text
+        } catch (e: Exception) {
             e.printStackTrace()
         }
     }
