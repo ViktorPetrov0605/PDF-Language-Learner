@@ -1,4 +1,4 @@
-package com.example.webviewtest
+package com.example.pdflearner
 
 import org.junit.Test
 

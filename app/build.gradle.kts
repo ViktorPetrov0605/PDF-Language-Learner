@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.webviewtest"
+    namespace = "com.example.pdflearner"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.example.webviewtest"
+        applicationId = "com.example.pdflearner"
         minSdk = 30
         targetSdk = 34
         versionCode = 1

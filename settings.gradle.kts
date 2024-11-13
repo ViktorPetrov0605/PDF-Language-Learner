@@ -19,5 +19,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Web View Test"
+rootProject.name = "PDF Learner"
 include(":app")

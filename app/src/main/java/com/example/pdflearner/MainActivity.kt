@@ -1,16 +1,13 @@
-package com.example.webviewtest
+package com.example.pdflearner
 
-import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.provider.OpenableColumns
 import android.widget.Button
 import android.widget.TextView
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import com.itextpdf.text.pdf.PdfReader
 import com.itextpdf.text.pdf.parser.PdfTextExtractor
-import java.io.InputStream
 
 class MainActivity : AppCompatActivity() {
 
