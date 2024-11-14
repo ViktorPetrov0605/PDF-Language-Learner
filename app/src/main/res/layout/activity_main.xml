@@ -40,7 +40,7 @@
             android:id="@+id/idTVCardWord"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="20sp"
+            android:textSize="40sp"
             android:textAlignment="center"
             android:textColor="#333333" />
     </androidx.cardview.widget.CardView>
@@ -63,6 +63,38 @@
         style="@android:style/Widget.Material.Button"
         android:visibility="gone"/>
 
+    <!-- Button and input for correct word -->
+    <EditText
+        android:id="@+id/idETUserInput"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/idCardView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:hint="Enter translation"
+        android:inputType="text"
+        android:layout_margin="8dp"
+        android:background="@android:drawable/edit_text" />
+
+    <Button
+        android:id="@+id/idBtnSubmitAnswer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/idETUserInput"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="8dp"
+        android:text="Submit Answer" />
+
+    <TextView
+        android:id="@+id/idTVFeedback"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/idBtnSubmitAnswer"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="8dp"
+        android:textSize="18sp"
+        android:textColor="#000000"
+        android:visibility="gone" />
 
     <!-- ScrollView for extracted text display -->
     <ScrollView
