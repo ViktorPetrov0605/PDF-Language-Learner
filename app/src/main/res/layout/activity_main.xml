@@ -8,9 +8,7 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-
-    <!--on below line we are creating
-    a text for heading of our app-->
+    <!-- Heading TextView -->
     <TextView
         android:id="@+id/idTVExtracter"
         android:layout_width="match_parent"
@@ -24,14 +22,48 @@
         android:textSize="18sp"
         android:textStyle="bold" />
 
-    <!--on below line we are creating a scroll view for our text-->
+    <!-- CardView for Word Display -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/idCardView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/idTVExtracter"
+        android:layout_marginTop="16dp"
+        android:elevation="4dp"
+        android:padding="16dp"
+        android:clickable="true"
+        android:focusable="true">
+
+        <!-- TextView inside CardView to display word/translation -->
+        <TextView
+            android:id="@+id/idTVCardWord"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:textAlignment="center"
+            android:textColor="#333333" />
+    </androidx.cardview.widget.CardView>
+
+    <!-- New Button to Get Another Random Word -->
+    <Button
+        android:id="@+id/idBtnNewWord"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/idCardView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:text="Show New Word"
+        android:textAllCaps="false" />
+
+    <!-- ScrollView for extracted text display -->
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@id/idBtnExtract"
-        android:layout_below="@id/idTVExtracter">
+        android:layout_below="@id/idCardView">
 
-        <!--text view for displaying our extracted text-->
+        <!-- TextView for displaying extracted text -->
         <TextView
             android:id="@+id/idTVPDF"
             android:layout_width="match_parent"
@@ -39,7 +71,7 @@
 
     </ScrollView>
 
-    <!--button for starting extraction process-->
+    <!-- Extract Button -->
     <Button
         android:id="@+id/idBtnExtract"
         android:layout_width="match_parent"
@@ -51,4 +83,4 @@
         android:layout_marginBottom="20dp"
         android:text="Extract Text from PDF"
         android:textAllCaps="false" />
-    </RelativeLayout>
+</RelativeLayout>
