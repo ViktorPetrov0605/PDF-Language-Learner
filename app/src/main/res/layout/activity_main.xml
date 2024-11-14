@@ -60,7 +60,8 @@
         android:focusableInTouchMode="true"
         android:clickable="true"
 
-        style="@android:style/Widget.Material.Button" />
+        style="@android:style/Widget.Material.Button"
+        android:visibility="gone"/>
 
 
     <!-- ScrollView for extracted text display -->

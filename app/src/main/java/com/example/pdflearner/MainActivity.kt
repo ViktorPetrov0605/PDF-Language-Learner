@@ -3,6 +3,7 @@ package com.example.pdflearner
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import android.widget.TextView
 import androidx.activity.result.contract.ActivityResultContracts
@@ -52,9 +53,9 @@ class MainActivity : AppCompatActivity() {
         cardView.setOnClickListener {
             toggleTranslation()
         }
-        val Log = Logger.getLogger(MainActivity::class.java.name)
+        //val Log = Logger.getLogger(MainActivity::class.java.name)
         newWordBtn.setOnClickListener {
-            Log.warning("New Word button clicked")
+            //Log.warning("New Word button clicked")
             showRandomWord() // Show a new random word when this button is clicked
         }
     }
@@ -86,6 +87,15 @@ class MainActivity : AppCompatActivity() {
                     }
 
                     pdfReader.close()
+                }
+
+                // Show "Show New Word" button if pairs are found, otherwise hide it
+                if (wordTranslationPairs.isNotEmpty()) {
+                    newWordBtn.visibility = View.VISIBLE
+                    showRandomWord() // Show the initial word on the card
+                } else {
+                    newWordBtn.visibility = View.GONE
+                    cardTextView.text = "No valid entries found."
                 }
 
                 // Show an initial random word on the card if there are pairs available
