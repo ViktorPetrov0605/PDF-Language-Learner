@@ -12,6 +12,8 @@ import com.itextpdf.text.pdf.PdfReader
 import com.itextpdf.text.pdf.parser.PdfTextExtractor
 import kotlin.random.Random
 
+import java.util.logging.Logger;
+
 class MainActivity : AppCompatActivity() {
 
     lateinit var extractedTV: TextView
@@ -50,8 +52,9 @@ class MainActivity : AppCompatActivity() {
         cardView.setOnClickListener {
             toggleTranslation()
         }
-
+        val Log = Logger.getLogger(MainActivity::class.java.name)
         newWordBtn.setOnClickListener {
+            Log.warning("New Word button clicked")
             showRandomWord() // Show a new random word when this button is clicked
         }
     }

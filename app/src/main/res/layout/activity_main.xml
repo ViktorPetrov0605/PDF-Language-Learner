@@ -54,7 +54,14 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="16dp"
         android:text="Show New Word"
-        android:textAllCaps="false" />
+        android:textAllCaps="false"
+
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:clickable="true"
+
+        style="@android:style/Widget.Material.Button" />
+
 
     <!-- ScrollView for extracted text display -->
     <ScrollView
