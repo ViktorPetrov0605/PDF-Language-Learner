@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
@@ -45,37 +44,36 @@
             android:textColor="#333333" />
     </androidx.cardview.widget.CardView>
 
-    <!-- New Button to Get Another Random Word -->
-    <Button
-        android:id="@+id/idBtnNewWord"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <!-- ScrollView for extracted text display -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/idBtnExtract"
         android:layout_below="@id/idCardView"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="16dp"
-        android:text="Show New Word"
-        android:textAllCaps="false"
+        android:visibility="gone">
 
-        android:focusable="true"
-        android:focusableInTouchMode="true"
-        android:clickable="true"
+        <!-- TextView for displaying extracted text -->
+        <TextView
+            android:id="@+id/idTVPDF"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </ScrollView>
 
-        style="@android:style/Widget.Material.Button"
-        android:visibility="gone"/>
-
-    <!-- Button and input for correct word -->
+    <!-- Text input box for user translation -->
     <EditText
         android:id="@+id/idETUserInput"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/idCardView"
-        android:layout_centerHorizontal="true"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
         android:layout_marginTop="16dp"
         android:hint="Enter translation"
         android:inputType="text"
-        android:layout_margin="8dp"
-        android:background="@android:drawable/edit_text" />
+        android:background="@android:drawable/edit_text"
+        android:visibility="gone" />
 
+    <!-- Submit Answer Button -->
     <Button
         android:id="@+id/idBtnSubmitAnswer"
         android:layout_width="wrap_content"
@@ -83,8 +81,10 @@
         android:layout_below="@id/idETUserInput"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="8dp"
-        android:text="Submit Answer" />
+        android:text="Submit Answer"
+        android:visibility="gone" />
 
+    <!-- Feedback TextView -->
     <TextView
         android:id="@+id/idTVFeedback"
         android:layout_width="wrap_content"
@@ -96,20 +96,20 @@
         android:textColor="#000000"
         android:visibility="gone" />
 
-    <!-- ScrollView for extracted text display -->
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@id/idBtnExtract"
-        android:layout_below="@id/idCardView">
-
-        <!-- TextView for displaying extracted text -->
-        <TextView
-            android:id="@+id/idTVPDF"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
-    </ScrollView>
+    <!-- Show New Word Button -->
+    <Button
+        android:id="@+id/idBtnNewWord"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/idTVFeedback"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:text="Show New Word"
+        android:textAllCaps="false"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:clickable="true"
+        android:visibility="gone" />
 
     <!-- Extract Button -->
     <Button
